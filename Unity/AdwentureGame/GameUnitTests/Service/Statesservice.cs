@@ -3,11 +3,7 @@ using AdventureGame.Domain.Interfaces;
 using AdventureGame.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdventureGame.UnitTests.Service {
 
@@ -45,7 +41,7 @@ namespace AdventureGame.UnitTests.Service {
       //Act
       List<State> results = service.GetAll() as List<State>;
 
-      //Assert
+      // Assert
       Assert.IsNotNull(results);
       Assert.AreEqual(5, results.Count);
     }
@@ -62,7 +58,7 @@ namespace AdventureGame.UnitTests.Service {
       // set up the repository’s Delete call
       mockRepository.Setup(r => r.Delete(It.IsAny<State>()));
 
-      // act
+      // Act
       service.DeleteState(state);
 
       // Assert
@@ -85,7 +81,7 @@ namespace AdventureGame.UnitTests.Service {
         });
 
       // Act
-      service.DeleteState(service.GetState(stateId));
+      service.DeleteState(mockRepository.Object.GetById(stateId));
 
       // Assert
       Assert.AreEqual(listStates.Count, 4);
