@@ -4,6 +4,7 @@ using AdventureGame.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AdventureGame.UnitTests.Service {
 
@@ -23,13 +24,29 @@ namespace AdventureGame.UnitTests.Service {
 
       mockRepository = new Mock<IStateRepository>();
       service = new StateService(mockRepository.Object);
-      listStates = new List<State>() {
-           new State() { Id = 10, Title = "Tavern" },
-           new State() { Id = 115, Title = "Field" },
-           new State() { Id = 8, Title = "Wood" },
-           new State() { Id = 2, Title = "Table" },
-           new State() { Id = 33, Title = "Trunk" }
-          };
+
+      listStates = new List<State>();
+
+      var state1 = new State() { Id = 10, Title = "Tavern" };
+      var state2 = new State() { Id = 115, Title = "Field" };
+      var state3 = new State() { Id = 8, Title = "Wood" };
+      var state4 = new State() { Id = 2, Title = "Table" };
+      var state5 = new State() { Id = 33, Title = "Trunk" };
+
+      state1.Transitions.Add(new Transition() {To = state2, Name = "Trans1" });
+      state1.Transitions.Add(new Transition() { To = state5, Name = "Trans1" });
+
+      state2.Transitions.Add(new Transition() { To = state3, Name = "Trans3" });
+
+      state4.Transitions.Add(new Transition() { To = state5, Name = "Trans4" });
+
+      state3.Transitions.Add(new Transition() { To = state5, Name = "Trans5" });
+
+      listStates.Add(state1);
+      listStates.Add(state2);
+      listStates.Add(state3);
+      listStates.Add(state4);
+      listStates.Add(state5);
     }
 
     [TestMethod]
@@ -74,7 +91,7 @@ namespace AdventureGame.UnitTests.Service {
 
       // Arrange
       mockRepository.Setup(x => x.GetAll()).Returns(listStates);
-      mockRepository.Setup(x => x.GetById(stateId)).Returns(listStates[0]);
+      mockRepository.Setup(x => x.GetById(stateId)).Returns(listStates[4]);
       mockRepository.Setup(r => r.Delete(It.IsAny<State>())).Callback((State state) => listStates.Remove(state));
 
       // Act
@@ -82,6 +99,9 @@ namespace AdventureGame.UnitTests.Service {
 
       // Assert
       Assert.AreEqual(listStates.Count, 4);
+      Assert.AreEqual(listStates.First(s=> s.Id == 10).Transitions.Count, 1);
+      Assert.AreEqual(listStates.First(s => s.Id == 2).Transitions.Count, 0);
+      Assert.AreEqual(listStates.First(s => s.Id == 8).Transitions.Count, 0);
     }
   }
 }
