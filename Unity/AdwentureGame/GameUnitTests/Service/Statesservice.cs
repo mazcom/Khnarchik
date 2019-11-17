@@ -35,10 +35,10 @@ namespace AdventureGame.UnitTests.Service {
     [TestMethod]
     public void GetAllStates() {
 
-      //Arrange
+      // Arrange
       mockRepository.Setup(x => x.GetAll()).Returns(listStates);
 
-      //Act
+      // Act
       List<State> results = service.GetAll() as List<State>;
 
       // Assert
@@ -75,10 +75,7 @@ namespace AdventureGame.UnitTests.Service {
       // Arrange
       mockRepository.Setup(x => x.GetAll()).Returns(listStates);
       mockRepository.Setup(x => x.GetById(stateId)).Returns(listStates[0]);
-      mockRepository.Setup(r => r.Delete(It.IsAny<State>()))
-        .Callback((State state) => {
-          listStates.Remove(state);
-        });
+      mockRepository.Setup(r => r.Delete(It.IsAny<State>())).Callback((State state) => listStates.Remove(state));
 
       // Act
       service.DeleteState(mockRepository.Object.GetById(stateId));
