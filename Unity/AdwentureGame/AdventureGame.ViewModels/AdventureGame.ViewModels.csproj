@@ -39,10 +39,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AdventureGame.Domain.Interfaces\AdventureGame.Domain.Interfaces.csproj">
-      <Project>{1d9c10cb-b000-442a-a608-fd48a62730ee}</Project>
-      <Name>AdventureGame.Domain.Interfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GameModel\AdventureGame.Domain.Core.csproj">
       <Project>{57d7dfc2-c59d-4ca5-aa46-d83a40ad91c5}</Project>
       <Name>AdventureGame.Domain.Core</Name>

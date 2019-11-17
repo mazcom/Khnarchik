@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{54A2FF80-840C-4DAE-BC00-D10762AC16CA}</ProjectGuid>
+    <ProjectGuid>{FBC9A704-6144-4D17-B7EA-8FFDE218F251}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>AdventureGame.Data</RootNamespace>
-    <AssemblyName>AdventureGame.Data</AssemblyName>
+    <RootNamespace>AdventureGame.Services</RootNamespace>
+    <AssemblyName>AdventureGame.Services</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -36,7 +36,17 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <Content Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IStateService.cs" />
+    <Compile Include="StateService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GameModel\AdventureGame.Domain.Core.csproj">
+      <Project>{57D7DFC2-C59D-4CA5-AA46-D83A40AD91C5}</Project>
+      <Name>AdventureGame.Domain.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

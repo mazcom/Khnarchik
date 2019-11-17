@@ -6,20 +6,14 @@ using System.Threading.Tasks;
 
 namespace AdventureGame.Domain.Core {
 
-  public class Transition {
+  public abstract class StateBase {
 
-    public Transition() {
-
-    }
-
-    public string Name {
+    /// <summary>
+    /// An unique number of a state
+    /// </summary>
+    public int Id {
       get; 
-      set;
-    }
-
-    public State To {
-      get; 
-      set;
+      private set;
     }
   }
 }

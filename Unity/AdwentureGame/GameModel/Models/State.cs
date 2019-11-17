@@ -4,21 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameModel.Models {
+namespace AdventureGame.Domain.Core {
 
-  public class State {
+  public class State : StateBase {
 
     public State() {
 
       Transitions = new List<Transition>();
-    }
-
-    /// <summary>
-    /// An unique number of a state
-    /// </summary>
-    public int UniqueNumber {
-      get;
-      set;
     }
 
     /// <summary>

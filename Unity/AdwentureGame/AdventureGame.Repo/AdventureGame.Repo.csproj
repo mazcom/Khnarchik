@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{57D7DFC2-C59D-4CA5-AA46-D83A40AD91C5}</ProjectGuid>
+    <ProjectGuid>{B4025384-BD8A-48DA-8958-BD058959A00E}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>AdventureGame.Domain.Core</RootNamespace>
-    <AssemblyName>AdventureGame.Domain.Core</AssemblyName>
+    <RootNamespace>AdventureGame.Repo</RootNamespace>
+    <AssemblyName>AdventureGame.Repo</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -38,12 +38,5 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Interfaces\IRepository.cs" />
-    <Compile Include="Models\StateBase.cs" />
-    <Compile Include="Models\State.cs" />
-    <Compile Include="Models\Transition.cs" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

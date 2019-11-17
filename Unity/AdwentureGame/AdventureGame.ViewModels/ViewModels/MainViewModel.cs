@@ -1,4 +1,4 @@
-﻿using GameModel.Models;
+﻿using AdventureGame.Domain.Core;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
