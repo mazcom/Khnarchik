@@ -39,13 +39,12 @@
     <Content Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IStateService.cs" />
     <Compile Include="StateService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GameModel\AdventureGame.Domain.Core.csproj">
+    <ProjectReference Include="..\GameModel\AdventureGame.Domain.csproj">
       <Project>{57D7DFC2-C59D-4CA5-AA46-D83A40AD91C5}</Project>
-      <Name>AdventureGame.Domain.Core</Name>
+      <Name>AdventureGame.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

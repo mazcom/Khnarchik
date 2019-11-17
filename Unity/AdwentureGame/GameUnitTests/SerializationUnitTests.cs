@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using AdventureGame.Domain.Core;
+using AdventureGame.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
@@ -15,8 +15,8 @@ namespace GameUnitTests {
 
       List<State> states = new List<State>();
 
-      states.Add(new State() {Title = "Start Point", Text = "Here you start your adventure" });
-      states.Add(new State() {Title = "A Wood", Text = "Let's entrance into the wood" });
+      states.Add(new State() {Title = "Start Point", Description = "Here you start your adventure" });
+      states.Add(new State() {Title = "A Wood", Description = "Let's entrance into the wood" });
 
       JsonSerializer serializer = new JsonSerializer();
       serializer.NullValueHandling = NullValueHandling.Include;

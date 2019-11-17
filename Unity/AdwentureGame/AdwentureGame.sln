@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureGame.Domain.Core", "GameModel\AdventureGame.Domain.Core.csproj", "{57D7DFC2-C59D-4CA5-AA46-D83A40AD91C5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureGame.Domain", "GameModel\AdventureGame.Domain.csproj", "{57D7DFC2-C59D-4CA5-AA46-D83A40AD91C5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureGame.UnitTests", "GameUnitTests\AdventureGame.UnitTests.csproj", "{E45D59F5-9C7A-4E77-8FA8-0F767844D8D5}"
 EndProject

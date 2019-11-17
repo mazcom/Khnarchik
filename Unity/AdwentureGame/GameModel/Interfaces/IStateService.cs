@@ -1,16 +1,16 @@
-﻿using AdventureGame.Domain.Core;
+﻿using AdventureGame.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdventureGame.Services {
+namespace AdventureGame.Domain {
 
   public interface IStateService {
 
-    IEnumerable<State> GetStates();
-    State GetState(long id);
+    IEnumerable<State> GetAll();
+    State GetState(int id);
     void AddState(State state);
     void UpdateState(State state);
     void DeleteState(State state);

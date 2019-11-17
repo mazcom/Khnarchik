@@ -39,9 +39,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GameModel\AdventureGame.Domain.Core.csproj">
+    <ProjectReference Include="..\GameModel\AdventureGame.Domain.csproj">
       <Project>{57d7dfc2-c59d-4ca5-aa46-d83a40ad91c5}</Project>
-      <Name>AdventureGame.Domain.Core</Name>
+      <Name>AdventureGame.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

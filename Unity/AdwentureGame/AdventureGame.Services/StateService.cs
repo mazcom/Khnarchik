@@ -1,4 +1,5 @@
-﻿using AdventureGame.Domain.Core;
+﻿using AdventureGame.Domain;
+using AdventureGame.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 
@@ -6,20 +7,21 @@ namespace AdventureGame.Services {
 
   public class StateService : IStateService {
 
-    private readonly IRepository<State> statesRepository;
+    private readonly IStateRepository statesRepository;
 
-    public StateService(IRepository<State> statesRepository) {
+    public StateService(IStateRepository statesRepository) {
 
       this.statesRepository = statesRepository;
     }
 
-    public IEnumerable<State> GetStates() {
+    public IEnumerable<State> GetAll() {
 
-      return statesRepository.List();
+      return statesRepository.GetAll();
     }
 
-    public State GetState(long id) {
-      throw new NotImplementedException();
+    public State GetState(int id) {
+
+      return statesRepository.GetById(id);
     }
 
     public void AddState(State state) {
@@ -30,7 +32,7 @@ namespace AdventureGame.Services {
 
     public void DeleteState(State state) {
 
-      var allStates = statesRepository.List();
+      var allStates = statesRepository.GetAll();
 
       // Remove Related Transitions
       foreach (var s in allStates)

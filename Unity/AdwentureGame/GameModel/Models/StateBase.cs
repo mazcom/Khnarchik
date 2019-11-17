@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdventureGame.Domain.Core {
+namespace AdventureGame.Domain {
 
   public abstract class StateBase {
 
@@ -13,7 +13,7 @@ namespace AdventureGame.Domain.Core {
     /// </summary>
     public int Id {
       get; 
-      private set;
+      set;
     }
   }
 }

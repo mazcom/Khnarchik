@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdventureGame.Domain.Core {
+namespace AdventureGame.Domain {
 
   public class State : StateBase {
 
@@ -24,7 +24,7 @@ namespace AdventureGame.Domain.Core {
     /// <summary>
     /// A description of a state.
     /// </summary>
-    public string Text {
+    public string Description {
       get;
       set;
     }
