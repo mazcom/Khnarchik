@@ -35,11 +35,8 @@ namespace AdventureGame.UnitTests.Service {
 
       state1.Transitions.Add(new Transition() {To = state2, Name = "Trans1" });
       state1.Transitions.Add(new Transition() { To = state5, Name = "Trans1" });
-
       state2.Transitions.Add(new Transition() { To = state3, Name = "Trans3" });
-
       state4.Transitions.Add(new Transition() { To = state5, Name = "Trans4" });
-
       state3.Transitions.Add(new Transition() { To = state5, Name = "Trans5" });
 
       listStates.Add(state1);
@@ -87,21 +84,22 @@ namespace AdventureGame.UnitTests.Service {
     [TestMethod]
     public void DeleteState2() {
 
-      int stateId = 10;
+      int stateIdToDelete = 33;
 
       // Arrange
       mockRepository.Setup(x => x.GetAll()).Returns(listStates);
-      mockRepository.Setup(x => x.GetById(stateId)).Returns(listStates[4]);
+      mockRepository.Setup(x => x.GetById(stateIdToDelete)).Returns(listStates.First(s=> s.Id == stateIdToDelete));
       mockRepository.Setup(r => r.Delete(It.IsAny<State>())).Callback((State state) => listStates.Remove(state));
 
       // Act
-      service.DeleteState(mockRepository.Object.GetById(stateId));
+      service.DeleteState(mockRepository.Object.GetById(stateIdToDelete));
 
       // Assert
       Assert.AreEqual(listStates.Count, 4);
       Assert.AreEqual(listStates.First(s=> s.Id == 10).Transitions.Count, 1);
       Assert.AreEqual(listStates.First(s => s.Id == 2).Transitions.Count, 0);
       Assert.AreEqual(listStates.First(s => s.Id == 8).Transitions.Count, 0);
+      Assert.IsTrue(!listStates.Exists(s=> s.Id == stateIdToDelete));
     }
   }
 }
