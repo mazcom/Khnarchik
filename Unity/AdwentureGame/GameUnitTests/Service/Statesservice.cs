@@ -27,11 +27,11 @@ namespace AdventureGame.UnitTests.Service {
 
       listStates = new List<State>();
 
-      var state1 = new State() { Id = 10, Title = "Tavern" };
+      var state1 = new State() { Id = 10, Title = "Tavern"};
       var state2 = new State() { Id = 115, Title = "Field" };
       var state3 = new State() { Id = 8, Title = "Wood" };
       var state4 = new State() { Id = 2, Title = "Table" };
-      var state5 = new State() { Id = 33, Title = "Trunk" };
+      var state5 = new State() { Id = 33, Title = "Trunk", Description = "You wake up as the sun..." };
 
       state1.Transitions.Add(new Transition() {To = state2, Name = "Trans1" });
       state1.Transitions.Add(new Transition() { To = state5, Name = "Trans1" });
@@ -140,6 +140,50 @@ namespace AdventureGame.UnitTests.Service {
       Assert.AreEqual(listStates.First(s => s.Id == 2).Transitions.Count, 0);
       Assert.AreEqual(listStates.First(s => s.Id == 8).Transitions.Count, 0);
       Assert.IsTrue(!listStates.Exists(s=> s.Id == stateIdToDelete));
+    }
+
+    [TestMethod]
+    public void UpdateState() {
+
+      // Arrange
+      var state = new State() {
+        Id = 111,
+        Title = "wizard"
+      };
+
+      // set up the repository’s Delete call
+      mockRepository.Setup(r => r.Delete(It.IsAny<State>()));
+
+      // Act
+      service.UpdateState(state);
+
+      // Assert
+      // verify that the Update method we set up above was called
+      // with the state as the first argument
+      mockRepository.Verify(r => r.Update(state));
+    }
+
+    [TestMethod]
+    public void UpdateState2() {
+
+      string newTitle = "Tower";
+      string newDesciption = "You have chosen...";
+      int stateIdToUpdate = 33;
+
+      // Arrange
+      // set up the repository’s Delete call
+      mockRepository.Setup(r => r.Delete(It.IsAny<State>()));
+      mockRepository.Setup(x => x.GetById(stateIdToUpdate)).Returns(listStates.First(s => s.Id == stateIdToUpdate));
+
+      // Act
+      State state = mockRepository.Object.GetById(stateIdToUpdate);
+      state.Title = newTitle;
+      state.Description = newDesciption;
+      service.UpdateState(state);
+
+      // Assert
+      Assert.IsTrue(listStates.First(s => s.Id == stateIdToUpdate).Title == newTitle);
+      Assert.IsTrue(listStates.First(s => s.Id == stateIdToUpdate).Description == newDesciption);
     }
   }
 }
