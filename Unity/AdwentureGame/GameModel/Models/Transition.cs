@@ -18,7 +18,7 @@ namespace AdventureGame.Domain {
     }
 
     public State To {
-      get; 
+      get;
       set;
     }
   }

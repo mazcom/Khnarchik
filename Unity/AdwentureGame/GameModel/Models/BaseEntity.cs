@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace AdventureGame.Domain {
 
-  public abstract class StateBase {
+  public abstract class BaseEntity {
 
     /// <summary>
-    /// An unique number of a state
+    /// An unique number of entity
     /// </summary>
     public int Id {
       get; 

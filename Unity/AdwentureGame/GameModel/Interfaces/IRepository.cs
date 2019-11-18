@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AdventureGame.Domain {
 
-  public interface IRepository<T> where T : StateBase {
+  public interface IRepository<T> where T : BaseEntity {
 
     IEnumerable<T> FindBy(Expression<Func<T, bool>> predicate);
     IEnumerable<T> GetAll();

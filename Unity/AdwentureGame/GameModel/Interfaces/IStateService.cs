@@ -1,4 +1,5 @@
 ﻿using AdventureGame.Domain;
+using AdventureGame.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +8,7 @@ using System.Threading.Tasks;
 
 namespace AdventureGame.Domain {
 
-  public interface IStateService {
+  public interface IStateService : IGenericEntityService<State> {
 
-    IEnumerable<State> GetAll();
-    State GetState(int id);
-    void AddState(State state);
-    void UpdateState(State state);
-    void DeleteState(State state);
   }
 }

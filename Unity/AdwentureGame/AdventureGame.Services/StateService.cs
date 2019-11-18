@@ -1,6 +1,4 @@
 ﻿using AdventureGame.Domain;
-using AdventureGame.Domain.Interfaces;
-using System;
 using System.Collections.Generic;
 
 namespace AdventureGame.Services {
@@ -24,25 +22,23 @@ namespace AdventureGame.Services {
       return statesRepository.GetById(id);
     }
 
-    public void AddState(State state) {
+    public void Add(State state) {
 
       statesRepository.Add(state);
       statesRepository.SaveChanges();
     }
 
-    public void DeleteState(State state) {
-
-      var allStates = statesRepository.GetAll();
+    public void Delete(State state) {
 
       // Remove Related Transitions
-      foreach (var s in allStates)
+      foreach (var s in statesRepository.GetAll())
         s.Transitions.RemoveAll(t => t.To == state);
 
       statesRepository.Delete(state);
       statesRepository.SaveChanges();
     }
 
-    public void UpdateState(State state) {
+    public void Update(State state) {
 
       statesRepository.Update(state);
       statesRepository.SaveChanges();

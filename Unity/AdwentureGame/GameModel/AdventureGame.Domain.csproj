@@ -39,10 +39,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IGenericEntityService.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\IService.cs" />
     <Compile Include="Interfaces\IStateRepositry.cs" />
     <Compile Include="Interfaces\IStateService.cs" />
-    <Compile Include="Models\StateBase.cs" />
+    <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\Transition.cs" />
   </ItemGroup>

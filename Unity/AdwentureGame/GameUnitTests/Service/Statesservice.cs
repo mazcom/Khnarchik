@@ -1,5 +1,4 @@
 ﻿using AdventureGame.Domain;
-using AdventureGame.Domain.Interfaces;
 using AdventureGame.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -73,7 +72,7 @@ namespace AdventureGame.UnitTests.Service {
       mockRepository.Setup(r => r.Delete(It.IsAny<State>()));
 
       // Act
-      service.AddState(state);
+      service.Add(state);
 
       // Assert
       // verify that the Add method we set up above was called
@@ -93,7 +92,7 @@ namespace AdventureGame.UnitTests.Service {
       mockRepository.Setup(r => r.Add(It.IsAny<State>())).Callback((State state) => listStates.Add(state));
 
       // Act
-      service.AddState(newState);
+      service.Add(newState);
 
       // Assert
       Assert.AreEqual(listStates.Count, 6);
@@ -113,7 +112,7 @@ namespace AdventureGame.UnitTests.Service {
       mockRepository.Setup(r => r.Delete(It.IsAny<State>()));
 
       // Act
-      service.DeleteState(state);
+      service.Delete(state);
 
       // Assert
       // verify that the Delete method we set up above was called
@@ -132,7 +131,7 @@ namespace AdventureGame.UnitTests.Service {
       mockRepository.Setup(r => r.Delete(It.IsAny<State>())).Callback((State state) => listStates.Remove(state));
 
       // Act
-      service.DeleteState(mockRepository.Object.GetById(stateIdToDelete));
+      service.Delete(mockRepository.Object.GetById(stateIdToDelete));
 
       // Assert
       Assert.AreEqual(listStates.Count, 4);
@@ -155,7 +154,7 @@ namespace AdventureGame.UnitTests.Service {
       mockRepository.Setup(r => r.Delete(It.IsAny<State>()));
 
       // Act
-      service.UpdateState(state);
+      service.Update(state);
 
       // Assert
       // verify that the Update method we set up above was called
@@ -179,7 +178,7 @@ namespace AdventureGame.UnitTests.Service {
       State state = mockRepository.Object.GetById(stateIdToUpdate);
       state.Title = newTitle;
       state.Description = newDesciption;
-      service.UpdateState(state);
+      service.Update(state);
 
       // Assert
       Assert.IsTrue(listStates.First(s => s.Id == stateIdToUpdate).Title == newTitle);

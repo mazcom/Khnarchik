@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AdventureGame.Domain {
 
-  public class State : StateBase {
+  public class State : BaseEntity {
 
     public State() {
 
