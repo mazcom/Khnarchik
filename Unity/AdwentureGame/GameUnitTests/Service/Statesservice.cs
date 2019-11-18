@@ -61,6 +61,46 @@ namespace AdventureGame.UnitTests.Service {
     }
 
     [TestMethod]
+    public void AddState() {
+
+      // Arrange
+      var state = new State() {
+        Id = 111,
+        Title = "wizard"
+      };
+
+      // set up the repository’s Delete call
+      mockRepository.Setup(r => r.Delete(It.IsAny<State>()));
+
+      // Act
+      service.AddState(state);
+
+      // Assert
+      // verify that the Add method we set up above was called
+      // with the state as the first argument
+      mockRepository.Verify(r => r.Add(state));
+    }
+
+    [TestMethod]
+    public void AddState2() {
+
+      var newState = new State() {
+        Id = 222,
+        Title = "Master of Garden"
+      };
+
+      // Arrange
+      mockRepository.Setup(r => r.Add(It.IsAny<State>())).Callback((State state) => listStates.Add(state));
+
+      // Act
+      service.AddState(newState);
+
+      // Assert
+      Assert.AreEqual(listStates.Count, 6);
+      Assert.IsTrue(listStates.Exists(s => s.Id == newState.Id));
+    }
+
+    [TestMethod]
     public void DeleteState() {
 
       // Arrange
