@@ -8,6 +8,6 @@ namespace AdventureGame.Domain {
 
   public interface IStateRepository : IRepository<State> {
 
-    State GetById(int id);
+    State GetById(Guid id);
   }
 }

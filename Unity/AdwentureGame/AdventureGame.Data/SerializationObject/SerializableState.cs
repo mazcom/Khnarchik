@@ -1,22 +1,30 @@
-﻿using System;
+﻿using AdventureGame.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdventureGame.Domain {
+namespace AdventureGame.Infrastructure {
+  
+  public class SerializableState {
 
-  public class State : BaseEntity {
+    public SerializableState() {
 
-    public State() {
-
-      Transitions = new List<Transition>();
+      Transitions = new List<SerializableTransition>();
     }
 
-    /// <summary>
-    /// A logical unique number of a state. It likes a page or so one.
-    /// </summary>
+    public Guid Id {
+      get;
+      set;
+    }
+
     public int Number {
+      get;
+      set;
+    }
+
+    public Guid SerialisationKey {
       get;
       set;
     }
@@ -40,7 +48,7 @@ namespace AdventureGame.Domain {
     /// <summary>
     /// The transitions
     /// </summary>
-    public List<Transition> Transitions {
+    public List<SerializableTransition> Transitions {
       get;
       set;
     }

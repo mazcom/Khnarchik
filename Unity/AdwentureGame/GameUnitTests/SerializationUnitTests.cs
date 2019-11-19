@@ -17,6 +17,9 @@ namespace GameUnitTests {
 
       states.Add(new State() {Title = "Start Point", Description = "Here you start your adventure" });
       states.Add(new State() {Title = "A Wood", Description = "Let's entrance into the wood" });
+      
+      // remove:
+      //states[1].Transitions.Add(new Transition() { To = states[0] });
 
       JsonSerializer serializer = new JsonSerializer();
       serializer.NullValueHandling = NullValueHandling.Include;
@@ -34,6 +37,12 @@ namespace GameUnitTests {
         // Deserialize from memory
         stream.Position = 0;
 
+        // remove:
+        //StreamReader reader = new StreamReader(stream, encoding: Encoding.Default, detectEncodingFromByteOrderMarks:true, bufferSize: 512, leaveOpen: true);
+        //string text = reader.ReadToEnd();
+        //reader.Close();
+        //stream.Position = 0;
+
 
         using (var sr = new StreamReader(stream))
         using (var jsonTextReader = new JsonTextReader(sr)) {
@@ -45,6 +54,29 @@ namespace GameUnitTests {
       }
       finally {
         stream.Dispose();
+      }
+    }
+
+    [TestMethod]
+    public void SerializeDessirializeTest2() {
+
+      List<State> states = new List<State>();
+
+      states.Add(new State() {Id= Guid.NewGuid(), Title = "Start Point", Description = "Here you start your adventure" });
+      states.Add(new State() { Id = Guid.NewGuid(), Title = "A Wood", Description = "Let's entrance into the wood" });
+      states[1].Transitions.Add(new Transition() { To = states[0] });
+
+
+      JsonSerializer serializer = new JsonSerializer();
+      serializer.NullValueHandling = NullValueHandling.Include;
+      serializer.Formatting = Formatting.Indented;
+
+      using(FileStream fs = File.Create(@"E:\3\data.json"))
+      using (StreamWriter sw = new StreamWriter(fs))
+      using (JsonWriter jw = new JsonTextWriter(sw)) {
+        jw.Formatting = Formatting.Indented;
+      
+        serializer.Serialize(jw, states);
       }
     }
   }

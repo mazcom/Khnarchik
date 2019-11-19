@@ -1,4 +1,5 @@
 ﻿using AdventureGame.Domain;
+using System;
 using System.Collections.Generic;
 
 namespace AdventureGame.Services {
@@ -17,7 +18,7 @@ namespace AdventureGame.Services {
       return statesRepository.GetAll();
     }
 
-    public State GetState(int id) {
+    public State GetState(Guid id) {
 
       return statesRepository.GetById(id);
     }

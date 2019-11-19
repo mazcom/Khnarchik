@@ -11,7 +11,7 @@ namespace AdventureGame.Domain {
     /// <summary>
     /// An unique number of entity
     /// </summary>
-    public int Id {
+    public Guid Id {
       get; 
       set;
     }

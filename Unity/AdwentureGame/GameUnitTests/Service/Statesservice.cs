@@ -2,6 +2,7 @@
 using AdventureGame.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,17 +27,17 @@ namespace AdventureGame.UnitTests.Service {
 
       listStates = new List<State>();
 
-      var state1 = new State() { Id = 10, Title = "Tavern"};
-      var state2 = new State() { Id = 115, Title = "Field" };
-      var state3 = new State() { Id = 8, Title = "Wood" };
-      var state4 = new State() { Id = 2, Title = "Table" };
-      var state5 = new State() { Id = 33, Title = "Trunk", Description = "You wake up as the sun..." };
+      var state1 = new State() { Id = Guid.Parse("0a3715b6-97a9-4721-9212-af96a292c88e"), Title = "Tavern"};
+      var state2 = new State() { Id = Guid.Parse("f79b8ec7-c64d-4c83-a4c8-ed8e0b1802b7"), Title = "Field" };
+      var state3 = new State() { Id = Guid.Parse("e4b37167-cd8a-4927-a330-4d8692111d71"), Title = "Wood" };
+      var state4 = new State() { Id = Guid.Parse("d3e3757c-b080-4851-b1a5-18e91222de9b"), Title = "Table" };
+      var state5 = new State() { Id = Guid.Parse("3a6d9539-527e-4377-9e3f-aa875b2147cc"), Title = "Trunk", Description = "You wake up as the sun..." };
 
       state1.Transitions.Add(new Transition() {To = state2, Name = "Trans1" });
       state1.Transitions.Add(new Transition() { To = state5, Name = "Trans1" });
       state2.Transitions.Add(new Transition() { To = state3, Name = "Trans3" });
-      state4.Transitions.Add(new Transition() { To = state5, Name = "Trans4" });
       state3.Transitions.Add(new Transition() { To = state5, Name = "Trans5" });
+      state4.Transitions.Add(new Transition() { To = state5, Name = "Trans4" });
 
       listStates.Add(state1);
       listStates.Add(state2);
@@ -64,7 +65,7 @@ namespace AdventureGame.UnitTests.Service {
 
       // Arrange
       var state = new State() {
-        Id = 111,
+        Id = Guid.NewGuid(),
         Title = "wizard"
       };
 
@@ -84,7 +85,7 @@ namespace AdventureGame.UnitTests.Service {
     public void AddState2() {
 
       var newState = new State() {
-        Id = 222,
+        Id = Guid.NewGuid(),
         Title = "Master of Garden"
       };
 
@@ -104,7 +105,7 @@ namespace AdventureGame.UnitTests.Service {
 
       // Arrange
       var state = new State() {
-        Id = 111,
+        Id = Guid.NewGuid(),
         Title = "wizard"
       };
 
@@ -123,7 +124,7 @@ namespace AdventureGame.UnitTests.Service {
     [TestMethod]
     public void DeleteState2() {
 
-      int stateIdToDelete = 33;
+      Guid stateIdToDelete = Guid.Parse("3a6d9539-527e-4377-9e3f-aa875b2147cc");
 
       // Arrange
       mockRepository.Setup(x => x.GetAll()).Returns(listStates);
@@ -135,9 +136,9 @@ namespace AdventureGame.UnitTests.Service {
 
       // Assert
       Assert.AreEqual(listStates.Count, 4);
-      Assert.AreEqual(listStates.First(s=> s.Id == 10).Transitions.Count, 1);
-      Assert.AreEqual(listStates.First(s => s.Id == 2).Transitions.Count, 0);
-      Assert.AreEqual(listStates.First(s => s.Id == 8).Transitions.Count, 0);
+      Assert.AreEqual(listStates.First(s=> s.Id == Guid.Parse("0a3715b6-97a9-4721-9212-af96a292c88e")).Transitions.Count, 1);
+      Assert.AreEqual(listStates.First(s => s.Id == Guid.Parse("e4b37167-cd8a-4927-a330-4d8692111d71")).Transitions.Count, 0);
+      Assert.AreEqual(listStates.First(s => s.Id == Guid.Parse("d3e3757c-b080-4851-b1a5-18e91222de9b")).Transitions.Count, 0);
       Assert.IsTrue(!listStates.Exists(s=> s.Id == stateIdToDelete));
     }
 
@@ -146,7 +147,7 @@ namespace AdventureGame.UnitTests.Service {
 
       // Arrange
       var state = new State() {
-        Id = 111,
+        Id = Guid.Parse("f79b8ec7-c64d-4c83-a4c8-ed8e0b1802b7"),
         Title = "wizard"
       };
 
@@ -167,7 +168,7 @@ namespace AdventureGame.UnitTests.Service {
 
       string newTitle = "Tower";
       string newDesciption = "You have chosen...";
-      int stateIdToUpdate = 33;
+      Guid stateIdToUpdate = Guid.Parse("f79b8ec7-c64d-4c83-a4c8-ed8e0b1802b7");
 
       // Arrange
       // set up the repository’s Delete call
