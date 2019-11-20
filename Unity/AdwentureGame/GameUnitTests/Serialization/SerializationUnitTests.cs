@@ -7,6 +7,7 @@ using AdventureGame.Domain;
 using AdventureGame.Infrastructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace GameUnitTests {
   [TestClass]
@@ -60,29 +61,6 @@ namespace GameUnitTests {
     }
 
     [TestMethod]
-    public void SerializeDessirializeTest2() {
-
-      //List<State> states = new List<State>();
-
-      //states.Add(new State() {Id= Guid.NewGuid(), Title = "Start Point", Description = "Here you start your adventure" });
-      //states.Add(new State() { Id = Guid.NewGuid(), Title = "A Wood", Description = "Let's entrance into the wood" });
-      //states[1].Transitions.Add(new Transition() { To = states[0] });
-
-
-      //JsonSerializer serializer = new JsonSerializer();
-      //serializer.NullValueHandling = NullValueHandling.Include;
-      //serializer.Formatting = Formatting.Indented;
-
-      //using(FileStream fs = File.Create(@"E:\3\data.json"))
-      //using (StreamWriter sw = new StreamWriter(fs))
-      //using (JsonWriter jw = new JsonTextWriter(sw)) {
-      //  jw.Formatting = Formatting.Indented;
-      
-      //  serializer.Serialize(jw, states);
-      //}
-    }
-
-    [TestMethod]
     public void SerializeDessirializeTest3() {
 
       List<State> states = new List<State>();
@@ -90,7 +68,7 @@ namespace GameUnitTests {
       states.Add(new State() { Id = Guid.NewGuid(), Number = 200,  Title = "A Wood", Description = "Let's entrance into the wood" });
       states[1].Transitions.Add(new Transition() { To = states[0] });
 
-      StateRepository repository = new StateRepository(@"E:\3\data.json");
+      JsonStateRepository repository = new JsonStateRepository(@"E:\3\data.json");
 
       foreach (var state in states)
         repository.Add(state);
@@ -101,7 +79,9 @@ namespace GameUnitTests {
     [TestMethod]
     public void SerializeDessirializeTest4() {
 
-      StateRepository repository = new StateRepository(@"E:\3\data.json");
+
+
+      JsonStateRepository repository = new JsonStateRepository(@"E:\3\data.json");
       var list = repository.GetAll().ToList();
       
     }

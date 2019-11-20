@@ -10,15 +10,20 @@ using System.Threading.Tasks;
 
 namespace AdventureGame.Infrastructure {
 
-  public class StateRepository : IStateRepository, IDisposable {
+  public class JsonStateRepository : IStateRepository {
 
     private readonly string fullFilePath;
-
     private Dictionary<Guid, SerializableState> states;
+    private readonly Stream outerStream;
 
-    public StateRepository(string fullFilePath) {
+    public JsonStateRepository(string fullFilePath) : this(stream: null) {
 
       this.fullFilePath = fullFilePath;
+    }
+
+    public JsonStateRepository(Stream stream) {
+
+      this.outerStream = stream;
       this.states = new Dictionary<Guid, SerializableState>();
     }
 
@@ -27,10 +32,20 @@ namespace AdventureGame.Infrastructure {
       List<SerializableState> serializableState;
       JsonSerializer serializer = new JsonSerializer();
 
-      using (FileStream stream = File.Open(fullFilePath, FileMode.Open))
-      using (var streamReader = new StreamReader(stream))
-      using (var jsonTextReader = new JsonTextReader(streamReader)) {
-        serializableState = (List<SerializableState>)serializer.Deserialize(jsonTextReader, typeof(List<SerializableState>));
+      Stream stream = null;
+
+      try {
+
+        stream = outerStream ?? File.Open(fullFilePath, FileMode.Open);
+
+        using (var streamReader = new StreamReader(stream, encoding: Encoding.Default, detectEncodingFromByteOrderMarks: true, bufferSize: 1024, leaveOpen: outerStream != null))
+        using (var jsonTextReader = new JsonTextReader(streamReader)) {
+          serializableState = (List<SerializableState>)serializer.Deserialize(jsonTextReader, typeof(List<SerializableState>));
+        }
+      }
+      finally {
+        if (outerStream == null && stream != null)
+          stream.Close();
       }
 
       Dictionary<Guid, State> statesDict = serializableState.ToDictionary(x => x.Id, x => ToDomainState(x));
@@ -40,7 +55,7 @@ namespace AdventureGame.Infrastructure {
         var domainState = statesDict[serState.Id];
 
         foreach (var trans in serState.Transitions) {
-          domainState.Transitions.Add(new Transition() {Name = trans.Name,  To = statesDict[trans.To] });
+          domainState.Transitions.Add(new Transition() { Name = trans.Name, To = statesDict[trans.To] });
         }
       }
 
@@ -80,11 +95,19 @@ namespace AdventureGame.Infrastructure {
       serializer.NullValueHandling = NullValueHandling.Include;
       serializer.Formatting = Formatting.Indented;
 
-      using (FileStream fs = File.Create(fullFilePath))
-      using (StreamWriter sw = new StreamWriter(fs))
-      using (JsonWriter jw = new JsonTextWriter(sw)) {
-        jw.Formatting = Formatting.Indented;
-        serializer.Serialize(jw, states.Values);
+      Stream stream = null;
+
+      try {
+        stream = outerStream ?? File.Create(fullFilePath);
+        using (StreamWriter sw = new StreamWriter(stream))
+        using (JsonWriter jw = new JsonTextWriter(sw)) {
+          jw.Formatting = Formatting.Indented;
+          serializer.Serialize(jw, states.Values);
+        }
+      }
+      finally {
+        if (outerStream == null && stream != null)
+          stream.Close();
       }
     }
 
@@ -116,9 +139,6 @@ namespace AdventureGame.Infrastructure {
         Title = serializableState.Title,
         Description = serializableState.Description
       };
-
-      //foreach (var trans in serializableState.Transitions)
-      //  domainState.Transitions.Add(new Transition() { Name = trans.Name });
 
       return domainState;
     }

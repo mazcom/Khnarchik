@@ -42,7 +42,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SerializationUnitTests.cs" />
+    <Compile Include="Serialization\SerializationUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\StatesService.cs" />
   </ItemGroup>
