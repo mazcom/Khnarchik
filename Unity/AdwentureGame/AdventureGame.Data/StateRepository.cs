@@ -1,6 +1,8 @@
 ﻿using AdventureGame.Domain;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -8,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace AdventureGame.Infrastructure {
 
-  class StateRepository : IStateRepository, IDisposable {
-    
+  public class StateRepository : IStateRepository, IDisposable {
+
     private readonly string fullFilePath;
 
     private Dictionary<Guid, SerializableState> states;
@@ -38,16 +40,13 @@ namespace AdventureGame.Infrastructure {
     public void Add(State entity) {
 
       SerializableState serializableState = ToSerializableState(entity);
-      serializableState.SerialisationKey = Guid.NewGuid();
-
-      //this.states.Add(entity.Id, entity);
-
-      throw new NotImplementedException();
+      states.Add(serializableState.Id, serializableState);
     }
 
     public void Delete(State entity) {
 
-      throw new NotImplementedException();
+      if (states.ContainsKey(entity.Id))
+        states.Remove(entity.Id);
     }
 
     public void Update(State entity) {
@@ -57,7 +56,16 @@ namespace AdventureGame.Infrastructure {
 
     public void SaveChanges() {
 
-      throw new NotImplementedException();
+      JsonSerializer serializer = new JsonSerializer();
+      serializer.NullValueHandling = NullValueHandling.Include;
+      serializer.Formatting = Formatting.Indented;
+
+      using (FileStream fs = File.Create(fullFilePath))
+      using (StreamWriter sw = new StreamWriter(fs))
+      using (JsonWriter jw = new JsonTextWriter(sw)) {
+        jw.Formatting = Formatting.Indented;
+        serializer.Serialize(jw, states.Values);
+      }
     }
 
     public void Dispose() {
@@ -66,12 +74,17 @@ namespace AdventureGame.Infrastructure {
 
     protected SerializableState ToSerializableState(State domainModel) {
 
-      return new SerializableState() {
+      var serializableState = new SerializableState() {
         Id = domainModel.Id,
+        Number = domainModel.Number,
         Title = domainModel.Title,
         Description = domainModel.Description
       };
 
+      foreach (var trans in domainModel.Transitions)
+        serializableState.Transitions.Add(new SerializableTransition() { To = trans.To.Id, Name = trans.Name });
+
+      return serializableState;
     }
   }
 }

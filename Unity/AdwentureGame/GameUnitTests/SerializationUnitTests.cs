@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Linq;
 using AdventureGame.Domain;
+using AdventureGame.Infrastructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
@@ -78,6 +80,24 @@ namespace GameUnitTests {
       
         serializer.Serialize(jw, states);
       }
+    }
+
+    [TestMethod]
+    public void SerializeDessirializeTest3() {
+
+      StateRepository repository = new StateRepository(@"E:\3\data2.json");
+
+      repository.Add(new State() { Id = Guid.NewGuid(), Title = "Start Point", Description = "Here you start your adventure" });
+      repository.Add(new State() { Id = Guid.NewGuid(), Title = "A Wood", Description = "Let's entrance into the wood" });
+      repository.SaveChanges();
+    }
+
+    [TestMethod]
+    public void SerializeDessirializeTest4() {
+
+      StateRepository repository = new StateRepository(@"E:\3\data2.json");
+      var list = repository.GetAll().ToList();
+      
     }
   }
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace AdventureGame.Infrastructure {
   
+
   public class SerializableState {
 
     public SerializableState() {
@@ -20,11 +21,6 @@ namespace AdventureGame.Infrastructure {
     }
 
     public int Number {
-      get;
-      set;
-    }
-
-    public Guid SerialisationKey {
       get;
       set;
     }

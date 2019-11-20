@@ -66,6 +66,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AdventureGame.Data\AdventureGame.Infrastructure.csproj">
+      <Project>{54A2FF80-840C-4DAE-BC00-D10762AC16CA}</Project>
+      <Name>AdventureGame.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AdventureGame.Services\AdventureGame.Services.csproj">
       <Project>{FBC9A704-6144-4D17-B7EA-8FFDE218F251}</Project>
       <Name>AdventureGame.Services</Name>
