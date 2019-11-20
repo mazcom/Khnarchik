@@ -62,40 +62,46 @@ namespace GameUnitTests {
     [TestMethod]
     public void SerializeDessirializeTest2() {
 
-      List<State> states = new List<State>();
+      //List<State> states = new List<State>();
 
-      states.Add(new State() {Id= Guid.NewGuid(), Title = "Start Point", Description = "Here you start your adventure" });
-      states.Add(new State() { Id = Guid.NewGuid(), Title = "A Wood", Description = "Let's entrance into the wood" });
-      states[1].Transitions.Add(new Transition() { To = states[0] });
+      //states.Add(new State() {Id= Guid.NewGuid(), Title = "Start Point", Description = "Here you start your adventure" });
+      //states.Add(new State() { Id = Guid.NewGuid(), Title = "A Wood", Description = "Let's entrance into the wood" });
+      //states[1].Transitions.Add(new Transition() { To = states[0] });
 
 
-      JsonSerializer serializer = new JsonSerializer();
-      serializer.NullValueHandling = NullValueHandling.Include;
-      serializer.Formatting = Formatting.Indented;
+      //JsonSerializer serializer = new JsonSerializer();
+      //serializer.NullValueHandling = NullValueHandling.Include;
+      //serializer.Formatting = Formatting.Indented;
 
-      using(FileStream fs = File.Create(@"E:\3\data.json"))
-      using (StreamWriter sw = new StreamWriter(fs))
-      using (JsonWriter jw = new JsonTextWriter(sw)) {
-        jw.Formatting = Formatting.Indented;
+      //using(FileStream fs = File.Create(@"E:\3\data.json"))
+      //using (StreamWriter sw = new StreamWriter(fs))
+      //using (JsonWriter jw = new JsonTextWriter(sw)) {
+      //  jw.Formatting = Formatting.Indented;
       
-        serializer.Serialize(jw, states);
-      }
+      //  serializer.Serialize(jw, states);
+      //}
     }
 
     [TestMethod]
     public void SerializeDessirializeTest3() {
 
-      StateRepository repository = new StateRepository(@"E:\3\data2.json");
+      List<State> states = new List<State>();
+      states.Add(new State() {Id= Guid.NewGuid(), Number = 15,  Title = "Start Point", Description = "Here you start your adventure" });
+      states.Add(new State() { Id = Guid.NewGuid(), Number = 200,  Title = "A Wood", Description = "Let's entrance into the wood" });
+      states[1].Transitions.Add(new Transition() { To = states[0] });
 
-      repository.Add(new State() { Id = Guid.NewGuid(), Title = "Start Point", Description = "Here you start your adventure" });
-      repository.Add(new State() { Id = Guid.NewGuid(), Title = "A Wood", Description = "Let's entrance into the wood" });
+      StateRepository repository = new StateRepository(@"E:\3\data.json");
+
+      foreach (var state in states)
+        repository.Add(state);
+
       repository.SaveChanges();
     }
 
     [TestMethod]
     public void SerializeDessirializeTest4() {
 
-      StateRepository repository = new StateRepository(@"E:\3\data2.json");
+      StateRepository repository = new StateRepository(@"E:\3\data.json");
       var list = repository.GetAll().ToList();
       
     }

@@ -24,7 +24,27 @@ namespace AdventureGame.Infrastructure {
 
     public IEnumerable<State> GetAll() {
 
-      throw new NotImplementedException();
+      List<SerializableState> serializableState;
+      JsonSerializer serializer = new JsonSerializer();
+
+      using (FileStream stream = File.Open(fullFilePath, FileMode.Open))
+      using (var streamReader = new StreamReader(stream))
+      using (var jsonTextReader = new JsonTextReader(streamReader)) {
+        serializableState = (List<SerializableState>)serializer.Deserialize(jsonTextReader, typeof(List<SerializableState>));
+      }
+
+      Dictionary<Guid, State> statesDict = serializableState.ToDictionary(x => x.Id, x => ToDomainState(x));
+
+      foreach (var serState in serializableState) {
+
+        var domainState = statesDict[serState.Id];
+
+        foreach (var trans in serState.Transitions) {
+          domainState.Transitions.Add(new Transition() {Name = trans.Name,  To = statesDict[trans.To] });
+        }
+      }
+
+      return statesDict.Values.AsEnumerable();
     }
 
     public IEnumerable<State> FindBy(Expression<Func<State, bool>> predicate) {
@@ -85,6 +105,22 @@ namespace AdventureGame.Infrastructure {
         serializableState.Transitions.Add(new SerializableTransition() { To = trans.To.Id, Name = trans.Name });
 
       return serializableState;
+    }
+
+
+    protected State ToDomainState(SerializableState serializableState) {
+
+      var domainState = new State() {
+        Id = serializableState.Id,
+        Number = serializableState.Number,
+        Title = serializableState.Title,
+        Description = serializableState.Description
+      };
+
+      //foreach (var trans in serializableState.Transitions)
+      //  domainState.Transitions.Add(new Transition() { Name = trans.Name });
+
+      return domainState;
     }
   }
 }
