@@ -36,7 +36,12 @@ namespace AdventureGame.Infrastructure {
 
       try {
 
-        stream = outerStream ?? File.Open(fullFilePath, FileMode.Open);
+        if (outerStream != null && outerStream.Length > 0) {
+          outerStream.Position = 0;
+          stream = outerStream;
+        }
+        else
+          stream = File.Open(fullFilePath, FileMode.Open);
 
         using (var streamReader = new StreamReader(stream, encoding: Encoding.Default, detectEncodingFromByteOrderMarks: true, bufferSize: 1024, leaveOpen: outerStream != null))
         using (var jsonTextReader = new JsonTextReader(streamReader)) {
@@ -99,7 +104,7 @@ namespace AdventureGame.Infrastructure {
 
       try {
         stream = outerStream ?? File.Create(fullFilePath);
-        using (StreamWriter sw = new StreamWriter(stream))
+        using (StreamWriter sw = new StreamWriter(stream, encoding: Encoding.Default, bufferSize: 1024, leaveOpen: true))
         using (JsonWriter jw = new JsonTextWriter(sw)) {
           jw.Formatting = Formatting.Indented;
           serializer.Serialize(jw, states.Values);

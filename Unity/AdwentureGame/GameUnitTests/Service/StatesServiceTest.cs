@@ -9,7 +9,7 @@ using System.Linq;
 namespace AdventureGame.UnitTests.Service {
 
   [TestClass]
-  public class CountryServiceTest {
+  public class StatesServiceTest {
 
     private Mock<IStateRepository> mockRepository;
     private IStateService service;
