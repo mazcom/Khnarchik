@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureGame.UnitTests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureGame.WPF", "AdventureGame.WPF\AdventureGame.WPF.csproj", "{3CA2C21A-F4B1-41AF-9417-7C93E2674AB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureGame.ViewModels", "AdventureGame.ViewModels\AdventureGame.ViewModels.csproj", "{A487CC2A-376D-4D3D-9F1A-8F9444FDFADA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureGame.Infrastructure", "AdventureGame.Data\AdventureGame.Infrastructure.csproj", "{54A2FF80-840C-4DAE-BC00-D10762AC16CA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureGame.Repo", "AdventureGame.Repo\AdventureGame.Repo.csproj", "{B4025384-BD8A-48DA-8958-BD058959A00E}"
@@ -35,10 +33,6 @@ Global
 		{3CA2C21A-F4B1-41AF-9417-7C93E2674AB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CA2C21A-F4B1-41AF-9417-7C93E2674AB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CA2C21A-F4B1-41AF-9417-7C93E2674AB0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A487CC2A-376D-4D3D-9F1A-8F9444FDFADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A487CC2A-376D-4D3D-9F1A-8F9444FDFADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A487CC2A-376D-4D3D-9F1A-8F9444FDFADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A487CC2A-376D-4D3D-9F1A-8F9444FDFADA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{54A2FF80-840C-4DAE-BC00-D10762AC16CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{54A2FF80-840C-4DAE-BC00-D10762AC16CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54A2FF80-840C-4DAE-BC00-D10762AC16CA}.Release|Any CPU.ActiveCfg = Release|Any CPU

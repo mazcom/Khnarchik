@@ -7,12 +7,18 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="531.871">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <ListView x:Name="listView" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
+        <ListView x:Name="listView" 
+                  ItemsSource="{Binding States}"
+                  HorizontalAlignment="Stretch"  VerticalAlignment="Stretch">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Number}" />
+                        <TextBlock Text=" " />
+                        <TextBlock Text="{Binding Title}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
     </Grid>
 </UserControl>

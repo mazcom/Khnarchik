@@ -18,8 +18,21 @@ namespace AdventureGame.WPF {
   /// Interaction logic for MainWindow.xaml
   /// </summary>
   public partial class MainWindow : Window {
+
+    ServiceLocator locator;
+
     public MainWindow() {
       InitializeComponent();
+
+      this.Loaded += MainWindow_Loaded;
+
+    }
+
+    private void MainWindow_Loaded(object sender, RoutedEventArgs e) {
+
+      locator = new ServiceLocator();
+
+      this.DataContext = locator.MainViewModel;
     }
   }
 }

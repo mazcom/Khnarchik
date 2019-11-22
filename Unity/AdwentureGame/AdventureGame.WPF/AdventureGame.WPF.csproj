@@ -55,9 +55,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Kernel\ServiceLocator.cs" />
+    <Compile Include="Kernel\ServiceModule.cs" />
     <Compile Include="StatesUserControl.xaml.cs">
       <DependentUpon>StatesUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -100,6 +104,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AdventureGame.Data\AdventureGame.Infrastructure.csproj">
+      <Project>{54A2FF80-840C-4DAE-BC00-D10762AC16CA}</Project>
+      <Name>AdventureGame.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GameModel\AdventureGame.Domain.csproj">
+      <Project>{57D7DFC2-C59D-4CA5-AA46-D83A40AD91C5}</Project>
+      <Name>AdventureGame.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Ninject">
+      <Version>3.3.4</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

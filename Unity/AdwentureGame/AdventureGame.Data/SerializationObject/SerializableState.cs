@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AdventureGame.Infrastructure {
-  
 
   public class SerializableState {
 

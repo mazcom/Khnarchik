@@ -45,6 +45,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FakeStateRepository.cs" />
     <Compile Include="SerializationObject\SerializableState.cs" />
     <Compile Include="SerializationObject\SerializableTransition.cs" />
     <Compile Include="StateRepository.cs" />

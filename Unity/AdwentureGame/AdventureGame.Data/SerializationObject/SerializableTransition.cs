@@ -8,12 +8,8 @@ namespace AdventureGame.Infrastructure {
 
   public class SerializableTransition {
 
-    public SerializableTransition() {
-
-    }
-
     public string Name {
-      get; 
+      get;
       set;
     }
 

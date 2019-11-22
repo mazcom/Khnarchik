@@ -20,6 +20,13 @@ namespace AdventureGame.WPF {
   public partial class StatesUserControl : UserControl {
     public StatesUserControl() {
       InitializeComponent();
+
+      this.Loaded += StatesUserControl_Loaded;
+    }
+
+    private void StatesUserControl_Loaded(object sender, RoutedEventArgs e) {
+
+      //this.DataContext = new 
     }
   }
 }
