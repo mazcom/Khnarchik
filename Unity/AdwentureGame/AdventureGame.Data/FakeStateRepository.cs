@@ -39,7 +39,7 @@ namespace AdventureGame.Infrastructure {
       State towards = new State() {
         Id = Guid.NewGuid(),
         Number = 272,
-        Title = "Река",
+        Title = "Лес",
         Description = @"Вы идете по дороге дальше. Начинает смеркаться. Как странно быстро пролетело
                       время. Кажется, что только-только вошел в лес, а уже темно.",
       };

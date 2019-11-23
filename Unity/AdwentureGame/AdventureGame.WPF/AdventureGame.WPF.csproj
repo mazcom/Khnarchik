@@ -119,6 +119,12 @@
     <PackageReference Include="Ninject">
       <Version>3.3.4</Version>
     </PackageReference>
+    <PackageReference Include="WpfGraphControl">
+      <Version>1.0.0.3</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
