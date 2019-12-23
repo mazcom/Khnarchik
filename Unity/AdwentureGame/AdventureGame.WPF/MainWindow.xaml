@@ -36,7 +36,7 @@
             <GridSplitter Grid.Column="3" Width="5" HorizontalAlignment="Stretch" />
             <!--<TextBlock Grid.Column="2" FontSize="55" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap">Right side</TextBlock>-->
             <DockPanel Name="dockPanel" Grid.Column="2" Background="AliceBlue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></DockPanel>
-            <local:StatesUserControl  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5"/>
+            <local:StatesUserControl  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </Grid>
     </Grid>
 </Window>
