@@ -13,11 +13,11 @@ namespace TransmitterReceiver.Respository {
 
     public IEnumerable<SessionDocument> GetDocuments() {
 
-      var list  = new List<SessionDocument>();
+      var list = new List<SessionDocument>();
 
       using (LiteDatabase db = new LiteDatabase($"Filename={dbName}; Connection=shared")) {
-        
-        foreach(var doc in db.GetCollection<SessionDocument>().FindAll()) {
+
+        foreach (var doc in db.GetCollection<SessionDocument>().FindAll()) {
           list.Add(doc);
         }
 
@@ -52,7 +52,7 @@ namespace TransmitterReceiver.Respository {
     }
 
     public void UpdateDocument(SessionDocument document) {
-      
+
     }
   }
 }
