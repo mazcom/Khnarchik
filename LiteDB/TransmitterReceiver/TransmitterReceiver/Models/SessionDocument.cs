@@ -15,11 +15,11 @@ namespace TransmitterReceiver.Models {
     public SessionDocument(Session session, int id) {
 
       Session = session;
-      Id = id;
+      Number = id;
     }
 
     public Session Session { get; set; }
 
-    public int Id { get; set; }
+    public int Number { get; set; }
   }
 }

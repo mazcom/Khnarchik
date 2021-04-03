@@ -35,9 +35,9 @@ namespace ConsoleApp {
           Console.WriteLine("The list of the documents:");
           var documents = receiver.GetDocuments();
           foreach (var doc in documents) {
-            Console.WriteLine($"doc: id ={doc.Id}");
+            Console.WriteLine($"doc: id ={doc.Number}");
           }
-          Thread.Sleep(2000);
+          Thread.Sleep(1000);
         }
       });
 
