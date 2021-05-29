@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -10,6 +11,9 @@ namespace ConsoleApp {
   class Program {
     static void Main(string[] args) {
 
+
+      StringReader sr = new StringReader("");
+      //var sss=  sr.ReadLine();
 
       // Transmitter
       Task task = Task.Run(() => {
