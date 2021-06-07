@@ -109,7 +109,7 @@ namespace ObserverDesignPattern
   public sealed class Unsubscriber<TypeDefinition> : IDisposable
   {
     private readonly List<IObserver<TypeDefinition>> observers;
-    private IObserver<TypeDefinition> observer;
+    private readonly IObserver<TypeDefinition> observer;
 
     public Unsubscriber(List<IObserver<TypeDefinition>> observers, IObserver<TypeDefinition> observer)
     {
