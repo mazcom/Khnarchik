@@ -1,0 +1,11 @@
+TaskAwaiter  awaiter= task.GetAwaiter();
+
+TaskAwaiter - это специальная структура, которая помогает организовать процесс ожидания.
+
+
+
+public struct TaskAwaiter : ICriticalNotifyCompletion, InotifyCompletion
+{
+  public bool IsCompleted
+}
+

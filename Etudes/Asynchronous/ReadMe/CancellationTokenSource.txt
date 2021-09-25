@@ -5,4 +5,8 @@ CancellationTokenSource cancellation;
 
 cancellation.Cancel(); - говорим токену, чтобы тот отменился.
 
+cancellation.Cancel() - сам по себе не обырывает выполнение задачи, если внутри выполнения задачи не вызван token.ThrowIfCancellationRequested().
+
+ 
+
 

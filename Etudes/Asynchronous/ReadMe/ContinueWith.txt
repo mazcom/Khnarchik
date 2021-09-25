@@ -1,0 +1,10 @@
+task.ContuniueWith(continuation, TaskContinuationOptions.OnlyOnRanToCompletion) - только если задача хорошо выполнилась. 
+Если вдруг сломалась задача, то не выполнится. 
+
+TaskContinuationOptions.OnlyOnFaulted - выполнется только если задача сломалась.
+
+
+Action<Task<int>> continuation;
+
+continuation = t => Console.WriteLine("Result : " + task.Result);
+

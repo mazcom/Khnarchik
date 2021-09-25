@@ -1,0 +1,42 @@
+TaskScheduler - это некий контейнер, который может собирать очередь задач.
+Н-р, имеется 20 задач, и я хочу чтобы они были выполнены только ДВУМЯ потоками.  
+
+Или, н-р, я хочу чтобы эти 20 задач были выполнены синхроно в контексте текущего потока.
+
+
+Н-р, эту задачу я запущу завтра, а вот эту задачу я запущу аж 1 мая.
+
+У планировщика есть определенные методы, которые запускаются фабрикой.
+
+Главная задача метода QueueTask, добавить задачу в очередь и выполнить её асинхронно.
+
+
+class DelayTaskSchedular : TaskSchedular
+{
+  Queue<Task> queue = new Queue<Task>();
+  AutoresetEvent auto = AutoResetWEvent(false);
+
+
+  protected override void QueueTask(Task task) // вызывается автоматически фабрикой 
+  {
+    queue.Enqueue(task);
+	
+	// Если задача была выполнена, то второй разу она не будет выполнена.
+	WaitOrTimerCallback callback = (object state, bool timedOut) => base.TryExecuteTask(queue.Dequeue());
+	
+	// 
+	ThreadPool.RegisterWaitForSingleObject(auto, callback, null, 2000, true);
+	// 1. auto - от кого ждать сигнал.
+	// 2. callback - что выполнить.
+	// 3. null - 1 первый аргумент callback метода
+	// 4. 2000 - интервал между вызовами Callback метода
+	// 5. true - вызвать Callback метод один раз. false - вызвать Callback метод много раз.
+	
+  
+  }
+
+
+
+}
+
+
