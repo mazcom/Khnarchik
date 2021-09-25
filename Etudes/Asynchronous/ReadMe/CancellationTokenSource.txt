@@ -1,0 +1,8 @@
+CancellationTokenSource - это фабрика токенов.
+
+CancellationTokenSource cancellation;
+вызов cancellation.Token - это дай мне один токен. На тебе токен.
+
+cancellation.Cancel(); - говорим токену, чтобы тот отменился.
+
+
