@@ -1,5 +1,11 @@
+ContuniueWith возвращает новый экземпляр класса task, что позволит выстраивать цепочки продолжений. 
+
+
 task.ContuniueWith(continuation, TaskContinuationOptions.OnlyOnRanToCompletion) - только если задача хорошо выполнилась. 
 Если вдруг сломалась задача, то не выполнится. 
+
+
+
 
 TaskContinuationOptions.OnlyOnFaulted - выполнется только если задача сломалась.
 
