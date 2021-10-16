@@ -1,0 +1,30 @@
+﻿// create new solution
+dotnet new sln
+
+// creates new empty solution file AsynchronousSolution.sln
+dotnet new sln -n "DemoSolution"
+dotnet new sln -n DemoSolution
+
+// creates a console project with folder ProjectName
+dotnet new console --output ProjectName
+dotnet new console -n ProjectName
+
+// restores the dependencies and tools of a project
+dotnet restore
+
+
+// add ProjectName to the solution.
+dotnet sln add ProjectName
+dotnet sln add ProjectName/ProjectName.csproj
+dotnet sln DemoSolution.sln add ProjectName
+
+dotnet sln DemoSolution.sln add (ls -r **/*.csproj)
+dotnet sln DemoSolution.sln add "*/*.csproj"
+
+// remove 
+dotnet sln remove ProjectName/ProjectName.csproj
+
+// create xunit project with name "mytest"
+dotnet new xunit -n mytest
+
+
