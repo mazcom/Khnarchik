@@ -1,4 +1,46 @@
-﻿// create new solution
+﻿dotnet new --list
+
+Template Name                                 Short Name           Language    Tags                  
+--------------------------------------------  -------------------  ----------  ----------------------
+Console Application                           console              [C#],F#,VB  Common/Console        
+Class library                                 classlib             [C#],F#,VB  Common/Library        
+WPF Application                               wpf                  [C#],VB     Common/WPF            
+WPF Class library                             wpflib               [C#],VB     Common/WPF            
+WPF Custom Control Library                    wpfcustomcontrollib  [C#],VB     Common/WPF            
+WPF User Control Library                      wpfusercontrollib    [C#],VB     Common/WPF            
+Windows Forms App                             winforms             [C#],VB     Common/WinForms       
+Windows Forms Control Library                 winformscontrollib   [C#],VB     Common/WinForms       
+Windows Forms Class Library                   winformslib          [C#],VB     Common/WinForms       
+Worker Service                                worker               [C#],F#     Common/Worker/Web     
+MSTest Test Project                           mstest               [C#],F#,VB  Test/MSTest           
+NUnit 3 Test Project                          nunit                [C#],F#,VB  Test/NUnit            
+NUnit 3 Test Item                             nunit-test           [C#],F#,VB  Test/NUnit            
+xUnit Test Project                            xunit                [C#],F#,VB  Test/xUnit            
+Razor Component                               razorcomponent       [C#]        Web/ASP.NET           
+Razor Page                                    page                 [C#]        Web/ASP.NET           
+MVC ViewImports                               viewimports          [C#]        Web/ASP.NET           
+MVC ViewStart                                 viewstart            [C#]        Web/ASP.NET           
+Blazor Server App                             blazorserver         [C#]        Web/Blazor            
+Blazor WebAssembly App                        blazorwasm           [C#]        Web/Blazor/WebAssembly
+ASP.NET Core Empty                            web                  [C#],F#     Web/Empty             
+ASP.NET Core Web App (Model-View-Controller)  mvc                  [C#],F#     Web/MVC               
+ASP.NET Core Web App                          webapp               [C#]        Web/MVC/Razor Pages   
+ASP.NET Core with Angular                     angular              [C#]        Web/MVC/SPA           
+ASP.NET Core with React.js                    react                [C#]        Web/MVC/SPA           
+ASP.NET Core with React.js and Redux          reactredux           [C#]        Web/MVC/SPA           
+Razor Class Library                           razorclasslib        [C#]        Web/Razor/Library     
+ASP.NET Core Web API                          webapi               [C#],F#     Web/WebAPI            
+ASP.NET Core gRPC Service                     grpc                 [C#]        Web/gRPC              
+dotnet gitignore file                         gitignore                        Config                
+global.json file                              globaljson                       Config                
+NuGet Config                                  nugetconfig                      Config                
+Dotnet local tool manifest file               tool-manifest                    Config                
+Web Config                                    webconfig                        Config                
+Solution File                                 sln                              Solution              
+Protocol Buffer File                          proto                            Web/gRPC              
+
+
+// create new solution
 dotnet new sln
 
 // creates new empty solution file AsynchronousSolution.sln
@@ -12,14 +54,21 @@ dotnet new console -n ProjectName
 // restores the dependencies and tools of a project
 dotnet restore
 
-
 // add ProjectName to the solution.
 dotnet sln add ProjectName
 dotnet sln add ProjectName/ProjectName.csproj
 dotnet sln DemoSolution.sln add ProjectName
 
+// far manager. recursively add all the projects in sub-directories to a pre-existing solution file.
+FOR /R %i IN (*.csproj) DO dotnet sln add "%i"
+
+// run in far manager
+powershell.exe
 dotnet sln DemoSolution.sln add (ls -r **/*.csproj)
-dotnet sln DemoSolution.sln add "*/*.csproj"
+// run command exit to quit powershell
+exit
+
+--dotnet sln DemoSolution.sln add "*/*.csproj"
 
 // remove 
 dotnet sln remove ProjectName/ProjectName.csproj
@@ -27,4 +76,13 @@ dotnet sln remove ProjectName/ProjectName.csproj
 // create xunit project with name "mytest"
 dotnet new xunit -n mytest
 
+// create unit test project and add reference to a project
+dotnet new xunit -o ProjectName.Tests
+dotnet add ProjectName.Tests/ProjectName.Tests.csproj reference ProjectName/ProjectName.csproj
+dotnet add ./ProjectName.Tests/ProjectName.Tests.csproj reference ./ProjectName/ProjectName.csproj
 
+// run unit tests
+dotnet test
+
+// build solution
+dotnet build CLICommands.sln
