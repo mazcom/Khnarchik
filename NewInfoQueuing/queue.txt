@@ -6,3 +6,11 @@ https://fildev.net/2018/08/27/cqrs-example-of-implementation/
 
 // просматривать решения и алгоритмы.
 https://books.goalkicker.com/
+
+
+// встроенно ерешение патерна медиатр
+https://www.youtube.com/watch?v=bgoGtkmUAQg&ab_channel=TechWithPat
+
+// .NET 5 Dependency Injection
+https://www.youtube.com/watch?v=0x2KW-dJDQU&ab_channel=JetBrainsTV
+
