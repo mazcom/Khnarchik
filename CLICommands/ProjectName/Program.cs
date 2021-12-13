@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MediatR;
+using System;
 
 namespace ProjectName
 {
@@ -6,6 +7,7 @@ namespace ProjectName
     {
         static void Main(string[] args)
         {
+            
             Console.WriteLine("Hello World!");
         }
     }
