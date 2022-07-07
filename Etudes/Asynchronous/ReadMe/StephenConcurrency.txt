@@ -1,0 +1,115 @@
+Форма конкуренции:
+Асинхронная операция - операция, которая стартует и будут выполнена в будущем. Не блокирует оригинальный поток.
+когда операция выполнена, вызывается callback. 
+
+Другая форма конкуренции - это реактивное программирование. Реактивное программировнаие построено на асинхронных событиях 
+вместо синхронных операций. События могут произойти в любой момент и могут возникать много раз. 
+Реактивное программированаие - декларативный стиль, когда приложение реагирует на события. 
+
+keyword async сигналищирует компилятору,что нужно сгенерировать state-машину для метода наподобие как работает yield return. 
+
+Не поддавайтесь искушению вызывать Task.Wait, Task<TResult>.Result, или GetAwaiter().GetResult(); это может привести к взаимоблокировке.
+
+Consider the following method:
+
+async Task WaitAsync()
+{
+	// This await will capture the current context ...
+	await Task.Delay(TimeSpan.FromSeconds(1));
+	// ... and will attempt to resume the method here in that context.
+}
+
+void Deadlock()
+{
+	// Start the delay.
+	Task task = WaitAsync();
+	// Synchronously block, waiting for the async method to complete.
+	task.Wait();
+}
+
+The code in this example will deadlock if called from a UI or ASP.NET
+Classic context because both of those contexts only allow one thread in at
+a time. 
+
+Deadlock will call WaitAsync, which begins the delay. Deadlock then (synchronously) waits for that method to complete, blocking the context thread. When the delay completes, await attempts to resume
+WaitAsync within the captured context, but it cannot because there’s already a thread blocked in the context, and the context only allows one thread at a time. 
+
+Deadlock can be prevented two ways: you can use ConfigureAwait(false) within WaitAsync (which causes await to ignore its context), 
+or you can await the call to WaitAsync (making Deadlock into an async method).
+
+
+public void RotateMatrices(IEnumerable<int> items)
+{
+    Parallel.ForEach(items, i => { Thread.Sleep(i);  Console.WriteLine($"{i}"); });
+}
+
+
+async Task ThrowExceptionAsync()
+{
+	await Task.Delay(TimeSpan.FromSeconds(1));
+	throw new InvalidOperationException("Test");
+}
+async Task TestAsync()
+{
+try
+{
+	await ThrowExceptionAsync();
+}
+catch (InvalidOperationException)
+{
+}
+}
+Exceptions raised from async Task methods are placed on the returned
+Task. They are only raised when the returned Task is awaited:
+
+
+Асинхронное программирование
+Код называется асинхронным, если он запускает какую-то длительную операцию, но не дожидается ее завершения. 
+Противоположностью является блокирующий код, который ничего не делает, пока операция не завершится.
+
+Чем так хорош асинхронный код?
+Асинхронный код освобождает поток, из которого был запущен. И это очень хорошо по многим причинам.
+
+Часто существует лишь один поток, способный выполнить определенную задачу (например, поток пользовательского интерфейса) и, 
+если не освободить его быстро, то приложение перестанет реагировать на действия пользователя.
+
+Но самым важным мне кажется тот факт, что асинхронное выполнение открывает возможность для параллельных вычислений.
+
+
+---
+Asynchronous Streams
+---
+Asynchronous streams are a way to asynchronously receive multiple data items. They’re built on asynchronous enumerables
+(IAsyncEnumerable<T>). An asynchronous enumerable is an asynchronous version of an enumerable; that is, it can produce items on
+demand for a consumer, and each item may be produced asynchronously.
+I find it useful to contrast asynchronous streams with other types that may be more familiar and to consider the differences. This helps me remember
+when to use asynchronous streams and when other types would be more appropriate.
+
+When comparing Task<T> to asynchronous streams, the asynchronous streams are more similar to enumerables. Specifically, an
+IAsyncEnumerator<T> may provide any number of T values, one at a time. Like IEnumerator<T>, an IAsyncEnumerator<T> may be infinite in length.
+
+When your code iterates over an IEnumerable<T>, it blocks as it retrieves each element from the enumerable.
+IAsyncEnumerable<T> works just like an IEnumerable<T>, except that it asynchronously retrieves each next element.
+
+IAsyncEnumerable<T> also returns multiple items asynchronously, but the difference is that IAsyncEnumerable<T> can act
+asynchronously for each item returned. It’s a true asynchronous stream of items.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+		
